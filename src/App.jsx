@@ -1,9 +1,8 @@
 import './App.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons'
 import { AutoComplete, Input, Tooltip, Typography, Space, Card } from 'antd'
-
 import { fetchSearchResults } from './api'
 
 const { Title } = Typography
@@ -11,7 +10,14 @@ const { Title } = Typography
 const App = () => {
   const [options, setOptions] = useState([])
   const [movies, setMovies] = useState([])
-  const [movie, setMovie] = useState({})
+  const [movie, setMovie] = useState()
+  const searchInput = useRef();
+
+  useEffect(() => {
+    if (searchInput.current) {
+      searchInput.current.focus();
+    }
+  }, [searchInput]);
 
   const mutateQuery = useMutation(
     (string) => string && string.length > 2 && fetchSearchResults(string),
@@ -35,8 +41,8 @@ const App = () => {
       >
         <Input
           placeholder='Search here'
+          ref={searchInput}
           enterButton
-          focus
           prefix={<SearchOutlined className='site-form-item-icon' />}
           suffix={
             <Tooltip title='Clear'>
