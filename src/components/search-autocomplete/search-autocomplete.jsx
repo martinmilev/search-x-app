@@ -17,9 +17,10 @@ const SearchAutocomplete = ({ options, onSelect, onSearch }) => {
             onSearch={onSearch}
         >
             <Input
-                placeholder='Search here'
                 allowClear
+                placeholder='Search here'
                 ref={searchInput}
+                onPressEnter={(e) => onSelect(e.target.value)}
                 prefix={<SearchOutlined className='site-form-item-icon' />}
             />
         </AutoComplete>
