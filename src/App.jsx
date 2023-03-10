@@ -1,8 +1,8 @@
 import './App.css'
 import React, { useState, useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { CloseOutlined, SearchOutlined } from '@ant-design/icons'
-import { AutoComplete, Input, Tooltip, Typography, Space, Card } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+import { AutoComplete, Input, Typography, Space } from 'antd'
 import { fetchSearchResults } from './api'
 
 const { Title } = Typography
@@ -33,31 +33,25 @@ const App = () => {
 
   return (
     <div>
-      <Title>Search X</Title>
+      <Title class='enter'>Search X</Title>
       <AutoComplete
         options={options}
         onSelect={(text) => setMovie(movies[text])}
         onSearch={mutateQuery.mutate}
+        onClear={() => setOptions([])}
       >
         <Input
           placeholder='Search here'
           ref={searchInput}
           enterButton
+          allowClear
           prefix={<SearchOutlined className='site-form-item-icon' />}
-          suffix={
-            <Tooltip title='Clear'>
-              <CloseOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
-            </Tooltip>
-          }
         />
       </AutoComplete>
       {movie && (
-        <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
-          <Card title={movie.original_title} size='small'>
-            <p>{movie.popularity}</p>
-            <p>{movie.release_date}</p>
-            <p>{movie.overview}</p>
-          </Card>
+        <Space direction="vertical" style={{ textAlign: 'left' }}>
+          <Title level={2}>{movie.original_title}</Title>
+          <Typography>{movie.overview}</Typography>
         </Space>
       )}
     </div>
