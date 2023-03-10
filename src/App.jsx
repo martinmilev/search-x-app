@@ -25,7 +25,7 @@ const App = () => {
       onSuccess: (resp) => {
         let resultData = {}
         resp?.data?.results.forEach((result) => resultData = { ...resultData, [result.original_title]: result })
-        setOptions(Object.keys(resultData).map((key) => ({ value: key })) ?? [])
+        setOptions(Object.keys(resultData).map((key) => ({ value: key })).slice(0, 10) ?? [])
         setMovies(resultData)
       },
     }
