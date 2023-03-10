@@ -2,11 +2,11 @@ import React from 'react'
 import { Space, Typography } from 'antd'
 const { Title } = Typography
 
-const SearchResults = ({ results }) => results ? (
-  <Space direction="vertical" style={{ textAlign: 'left' }}>
-    <Title level={2}>{results.original_title}</Title>
-    <Typography>{results.overview}</Typography>
+const SearchResults = ({ results }) => results.map(result => (
+  <Space direction="vertical" style={{ textAlign: 'left', width: '100%' }} key={result.id}>
+    <Title level={3}>{result.title}</Title>
+    <Typography>{result.overview}</Typography>
   </Space>
-) : (null)
+))
 
 export default SearchResults
