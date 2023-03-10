@@ -1,11 +1,12 @@
 import React from 'react'
-import { Space, Typography } from 'antd'
-const { Title } = Typography
+import { Space } from 'antd'
 
 const SearchResults = ({ results }) => results.map(result => (
-  <Space direction="vertical" style={{ textAlign: 'left', width: '100%' }} key={result.id}>
-    <Title level={3}>{result.title}</Title>
-    <Typography>{result.overview}</Typography>
+  <Space direction="vertical" style={{ textAlign: 'left', width: '90%', marginTop: '20px' }} key={result.id}>
+      <a href={`https://www.themoviedb.org/movie/${result.id}`} target="_blank">
+        <strong>{result.title}</strong>
+      </a>
+      {result.overview}
   </Space>
 ))
 

@@ -3,10 +3,7 @@ import React, { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { SearchAutocomplete } from './components/search-autocomplete'
 import { SearchResults } from './components/search-results'
-import { Typography } from 'antd'
 import { fetchSearchResults } from './api'
-
-const { Title } = Typography
 
 const App = () => {
   const [options, setOptions] = useState([])
@@ -33,14 +30,12 @@ const App = () => {
 
   return (
     <div>
-      <div>
-        <Title>Search X</Title>
-        <SearchAutocomplete
-          options={options}
-          onSelect={onSelect}
-          onSearch={mutateQuery.mutate}
-        />
-      </div>
+      <h2>Search X</h2>
+      <SearchAutocomplete
+        options={options}
+        onSelect={onSelect}
+        onSearch={mutateQuery.mutate}
+      />
       <SearchResults results={movies} />
     </div>
   )
